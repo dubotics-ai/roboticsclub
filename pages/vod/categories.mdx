@@ -1,0 +1,100 @@
+import CodeTab from "../../components/codehighlight";
+
+# Rota `/vod/categories`
+
+Assim como a rota [/tv/categories](/tv/categories), `/vod/categories` é um endpoint importante da API Quero Assistir, que fornece uma lista de categorias disponíveis para conteúdo sob demanda. As categorias são identificadas por IDs exclusivos e associadas a nomes descritivos que ajudam os usuários a encontrar o tipo de conteúdo que desejam assistir.
+
+## Exemplo de Requisição
+
+<CodeTab cid="request-vod-categories" codeSamples={{
+  javascript: `const axios = require('axios');
+
+const apiUrl = 'https://api.queroassistir.com/vod/categories';
+
+axios.get(apiUrl)
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error('Erro na requisição:', error);
+    });`,
+  python: `import requests
+
+api_url = 'https://api.queroassistir.com/vod/categories'
+
+response = requests.get(api_url)
+
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print('Erro na requisição:', response.status_code)`,
+  php: `$apiUrl = 'https://api.queroassistir.com/vod/categories';
+
+$response = file_get_contents($apiUrl);
+
+if ($response !== false) {
+    $data = json_decode($response, true);
+    print_r($data);
+} else {
+    echo 'Erro na requisição';
+}`,
+  ruby: `require 'net/http'
+require 'json'
+
+api_url = URI('https://api.queroassistir.com/vod/categories')
+
+response = Net::HTTP.get(api_url)
+
+if response.code.to_i == 200
+  data = JSON.parse(response.body)
+  puts data
+else
+  puts 'Erro na requisição:', response.code
+end`,
+  rust: `extern crate reqwest;
+
+fn main() -> Result<(), reqwest::Error> {
+    let api_url = "https://api.queroassistir.com/vod/categories";
+
+    let response = reqwest::blocking::get(api_url)?;
+
+    if response.status().is_success() {
+        let data: serde_json::Value = response.json()?;
+        println!("{:?}", data);
+    } else {
+        eprintln!("Erro na requisição: {}", response.status());
+    }
+
+    Ok(())
+}`
+}} />
+
+## Exemplo de Resposta
+
+A resposta da rota `/vod/categories` é um JSON que mapeia IDs de categoria para nomes correspondentes. Aqui está um exemplo desse JSON:
+
+<details>
+  <summary>Ver exemplo de resposta</summary>
+  ```json copy
+  {
+  "0": "Ação",
+  "1": "Aventura",
+  "2": "Animação",
+  "3": "Comédia",
+  "4": "Crime",
+  "5": "Documentário",
+  "6": "Drama",
+  "7": "Família",
+  "8": "Fantasia",
+  "9": "História",
+  "10": "Horror",
+  "11": "Mistério",
+  "12": "Romance",
+  "13": "Terror",
+  "14": "Ficção Científica",
+  "15": "Anime",
+  "16": "Reality"
+}
+  ```
+</details>

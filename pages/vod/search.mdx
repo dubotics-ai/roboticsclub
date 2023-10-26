@@ -1,0 +1,121 @@
+import CodeTab from "../../components/codehighlight";
+
+# Rota `/search?t={termo}`
+
+A rota `/search?t=` é um recurso valioso da API Quero Assistir que permite aos usuários realizar pesquisas por conteúdo ao vivo com base em termos-chave. O parâmetro `t` na URL é usado para especificar o termo de pesquisa desejado.
+
+# Objeto da resposta e Erros
+
+## Resposta
+
+Retorna um array em json, contendo objetos com chaves do tipo [Vod](/vod/types).
+
+## Erros
+
+### 500
+
+```json
+{
+  "message": "error",
+  "error": "Server Internal Error.",
+  "id": "internal-error"
+}
+```
+
+> Significa um erro inesperado no sistema
+
+## Exemplo de Requisição
+
+<CodeTab cid="request-search-tv" codeSamples={{
+  javascript: `const axios = require('axios');
+
+const apiUrl = 'https://api.queroassistir.com/vod/search?t=loki';
+
+axios.get(apiUrl)
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error('Erro na requisição:', error);
+});`,
+  python: `import requests
+
+search_term = 'loki' # Termo de pesquisa: loki
+api_url = f'https://api.queroassistir.com/vod/search?t={search_term}'
+
+response = requests.get(api_url)
+
+if response.status_code == 200:
+data = response.json()
+print(data)
+else:
+print('Erro na requisição:', response.status_code)`,
+  php: `<?php
+$searchTerm = 'loki'; // Termo de pesquisa: loki
+$apiUrl = "https://api.queroassistir.com/vod/search?t={$searchTerm}";
+
+$response = file_get_contents($apiUrl);
+
+if ($response !== false) {
+    $data = json_decode($response, true);
+print_r($data);
+} else {
+echo 'Erro na requisição';
+}
+?>
+`,
+  ruby: `require 'net/http'
+require 'json'
+
+search_term = 'loki' # Termo de pesquisa: loki
+api_url = URI("https://api.queroassistir.com/vod/search?t=#{search_term}")
+
+response = Net::HTTP.get(api_url)
+
+if response.code.to_i == 200
+data = JSON.parse(response.body)
+puts data
+else
+puts 'Erro na requisição:', response.code
+end`,
+  rust: `extern crate reqwest;
+
+fn main() -> Result<(), reqwest::Error> {
+let search_term = "loki"; // Termo de pesquisa: loki
+let api_url = format!("https://api.queroassistir.com/vod/search?t={}", search_term);
+
+    let response = reqwest::blocking::get(&api_url)?;
+
+    if response.status().is_success() {
+        let data: serde_json::Value = response.json()?;
+        println!("{:?}", data);
+    } else {
+        eprintln!("Erro na requisição: {}", response.status());
+    }
+
+    Ok(())
+
+}`
+}} />
+
+## Exemplo de Resposta
+
+A resposta da rota `/vod/search?t={termo}` é um JSON com um array contendo os resultados da pesquisa. Aqui está um exemplo desse JSON:
+
+<details>
+  <summary>Ver exemplo de resposta</summary>
+  ```json copy
+[
+  {
+    "image": "https://image.tmdb.org/t/p/w300/jTBiR84Pyt22VMNsxvCQfFPf6iq.jpg",
+    "name": "Os Simpsons: O Bem, o Bart e o Loki",
+    "id": "tt14957270"
+  },
+  {
+    "image": "https://image.tmdb.org/t/p/w300/ukR0MkCQE6IylzBPd61txJi1L3E.jpg",
+    "name": "Loki",
+    "id": "tt9140554"
+  }
+]
+  ```
+</details>

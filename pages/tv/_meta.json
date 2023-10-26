@@ -1,0 +1,6 @@
+{
+  "index": "Sobre",
+  "categories": "/categories",
+  "categories-id": "/categories/{id}",
+  "search": "/search?t={termo}"
+}

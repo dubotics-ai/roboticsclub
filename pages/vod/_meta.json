@@ -1,0 +1,10 @@
+{
+  "index": "Sobre",
+  "types": "Tipos Comuns",
+  "news": "/news",
+  "categories": "/categories",
+  "categories-get": "/categories/get",
+  "search": "/search?t={termo}",
+  "info": "/info/{id}",
+  "link": "/link/{id}"
+}

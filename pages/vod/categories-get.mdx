@@ -1,0 +1,249 @@
+import CodeTab from "../../components/codehighlight";
+
+# Rota `/categories/get`
+
+A rota `/categories/get` é um endpoint essencial da API Quero Assistir, que permite aos usuários acessar informações detalhadas sobre uma categoria específica de conteúdo sob demanda.
+
+## Atenção
+
+Diferente da rota [/tv/categories/id](/tv/categories-id), a rota `/categories/get` não recebe uma url customizada, ela recebe uma série de parâmetros via query que podem ou não ser nulos e adicionados um aos outros. Os parâmetros de query são:<br /><br />
+`page`: um número identificando a página que se deseja obter. Caso não seja informado, o padrão será sempre 1. Páginas que não existem retornarão a última página existente correspondente. <br />
+Exemplo: `?page=1`<br/><br/>
+`categories`: uma lista de ids de categorias informados na rota [/vod/categories](/vod/categories) separados por `,`. Será desconsiderado se não estiver presente na url.<br/>
+Exemplo: `?categories=0,1,2,3`<br/><br/>
+`year`: um número referenciando um ano de lançamento para o conteúdo. Será desconsiderado se não estiver presente na url.<br/>
+Exemplo: `?year=2023`<br/><br/>
+`country`: uma string que diz o país de lançamento do filme. Será desconsiderado se não estiver presente na url.<br/>
+Exemplo: `?country=Brasil`<br/><br/>
+`sort_by`: uma string dizendo o tipo de filtragem. Pode ser `year`,`title`, `imdb_rate` ou `created_at`. Será desconsiderado se não estiver presente na url.<br/>
+Exemplo: `?sort_by=year`<br/><br/>
+
+# Objeto da resposta e Erros
+
+## Resposta
+
+Retorna um objeto json com duas chaves principais, que retornam outros objetos mais detalhados:
+
+`movies`: um array de objetos [Vod](/vod/types) com os filmes relacionadas.<br />
+`shows`: um array de objetos [Vod](/vod/types) com as séries relacionadas.<br /><br />
+
+## Erros
+
+### 400
+
+```json
+{
+  "message": "error",
+  "error": "message",
+  "id": "unknow-error"
+}
+```
+
+> Significa um erro desconhecido no sistema.
+
+## Exemplo de Requisição
+
+<CodeTab cid="request-categories-id" codeSamples={{
+  javascript: `const axios = require('axios');
+
+const apiUrl = 'https://api.queroassistir.com/vod/categories/get?categories=0';
+
+axios.get(apiUrl)
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error('Erro na requisição:', error);
+});`,
+  python: `import requests
+
+api_url = f'https://api.queroassistir.com/vod/categories/get?categories=0'
+
+response = requests.get(api_url)
+
+if response.status_code == 200:
+data = response.json()
+print(data)
+else:
+print('Erro na requisição:', response.status_code)`,
+  php: `<?php
+$apiUrl = "https://api.queroassistir.com/vod/categories/get?categories=0";
+
+$response = file_get_contents($apiUrl);
+
+if ($response !== false) {
+    $data = json_decode($response, true);
+print_r($data);
+} else {
+echo 'Erro na requisição';
+}
+?>`,
+  ruby: `require 'net/http'
+require 'json'
+
+api_url = URI("https://api.queroassistir.com/vod/categories/get?categories=0")
+
+response = Net::HTTP.get(api_url)
+
+if response.code.to_i == 200
+data = JSON.parse(response.body)
+puts data
+else
+puts 'Erro na requisição:', response.code
+end`,
+  rust: `extern crate reqwest;
+
+fn main() -> Result<(), reqwest::Error> {
+let api_url = format!("https://api.queroassistir.com/vod/categories/get?categories=0");
+
+    let response = reqwest::blocking::get(&api_url)?;
+
+    if response.status().is_success() {
+        let data: serde_json::Value = response.json()?;
+        println!("{:?}", data);
+    } else {
+        eprintln!("Erro na requisição: {}", response.status());
+    }
+
+    Ok(())
+
+}`
+}} />
+
+## Exemplo de Resposta
+
+A resposta da rota `/vod/categories/get` é um JSON com um objeto contendo os itens relacionados. Aqui está um exemplo desse JSON:
+
+<details>
+  <summary>Ver exemplo de resposta</summary>
+  ```json copy
+  
+{
+  "movies": [
+    {
+      "image": "https://image.tmdb.org/t/p/w300/53zYYgWqxxmTaMlsIfiCWCLRwJf.jpg",
+      "name": "Cercados",
+      "id": "tt2572212"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/1eKWqTHp4OgKdx1QX1O9LxKHr1M.jpg",
+      "name": "Mortal Kombat Legends: Cage - Bom de Briga",
+      "id": "tt22698070"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/bPf85Ro1XgWnhJMfAZa3SdQ4Muf.jpg",
+      "name": "Sayen: A Rota Seca",
+      "id": "tt27351936"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/eqaSh2PjYcGpS6rybz6UjLNuvrg.jpg",
+      "name": "A Chamada",
+      "id": "tt6906292"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/3pPZ9JhNz3VMmASVir5SMHvTDUU.jpg",
+      "name": "Jumper",
+      "id": "tt0489099"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/2btxGF270fxOeNJInRNnFtZGkAA.jpg",
+      "name": "Polar",
+      "id": "tt4139588"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/uJgdT1boTSP0dDIjdTgGleg71l4.jpg",
+      "name": "Kate",
+      "id": "tt7737528"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/N9jyoeH3wKhiHYNYLE9Pnnls9D.jpg",
+      "name": "Lobisomem na Noite",
+      "id": "tt15318872"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/vQ4DQb617N4ipB7LPfUIfGR3X9P.jpg",
+      "name": "As Tartarugas Ninja III",
+      "id": "tt0108308"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/RPXIoMjVtT7OOPnbcXceyoFRTh.jpg",
+      "name": "As Tartarugas Ninja II: O Segredo do Ooze",
+      "id": "tt0103060"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/dkCdKgl24TMzwEfAtKrBNxqujv8.jpg",
+      "name": "As Tartarugas Ninja",
+      "id": "tt0100758"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/z2fgGa0B5Bk8Ak3ScaTEEnO7qCZ.jpg",
+      "name": "Muti: Crime e Poder",
+      "id": "tt13141250"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/msgWkL23ZslTVZJRYJIng83mYny.jpg",
+      "name": "Awareness: A Realidade é Uma Ilusão",
+      "id": "tt18556326"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/5BEYUwi4PCTfCaoGCL17DD9h7sM.jpg",
+      "name": "A Bailarina",
+      "id": "tt26350277"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/tHA2wltMBWuaTzOzSf7P2bzhmIy.jpg",
+      "name": "O Rei dos Assassinos",
+      "id": "tt14057604"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/daEvqdnGCrbk5yMkYkxoDpNuCkP.jpg",
+      "name": "O Engenheiro",
+      "id": "tt26450742"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/cxSKca4dNlk7O7PMiEYT203vlIw.jpg",
+      "name": "One Day as a Lion",
+      "id": "tt15783426"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/2BWhcrlPr6UvSJy5D044Ikq2QxH.jpg",
+      "name": "Som da Liberdade",
+      "id": "tt7599146"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/B1WdiNIa8qQNrZZ7pUXltZoFpr.jpg",
+      "name": "살수",
+      "id": "tt21109580"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/187OBBT5oMQ2XPXgx9F8JhlycvK.jpg",
+      "name": "Resistência",
+      "id": "tt11858890"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/moWEJfrNnywDAJAiFZ1r2OfF5s4.jpg",
+      "name": "Zerando a Vida",
+      "id": "tt4769836"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/qfglisVh5Nmo1nGYCoMzqyZUWcz.jpg",
+      "name": "À Espreita",
+      "id": "tt8270664"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/ocKoEvCPX809gWsyEXRP2zTViY5.jpg",
+      "name": "Carga Máxima",
+      "id": "tt16427938"
+    },
+    {
+      "image": "https://image.tmdb.org/t/p/w300/dQxlUkhKGILgq9jbVEe3WPaiW2q.jpg",
+      "name": "Os Mercenários 4",
+      "id": "tt3291150"
+    }
+  ],
+  "shows": [
+    
+  ]
+}
+  ```
+</details>

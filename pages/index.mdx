@@ -1,11 +1,44 @@
-# Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+import { Callout } from 'nextra/components'
 
-## What is Nextra?
+<Callout emoji="👾" type="info">
+ Atenção: Muitas chamadas a API, que afetem o sistema, resutam num banimento temporário ou permanente do endereço de ip do responsável.
+</Callout>
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+# Quero Assistir API - Get Started
 
-## Documentation
+Bem-vindo à documentação da API Quero Assistir! Esta API oferece acesso a uma ampla variedade de informações sobre filmes, séries e programas de TV, e utiliza o protocolo HLS (HTTP Live Streaming) para transmitir conteúdo de vídeo. Nesta seção, você encontrará informações essenciais para começar a usar a API com o suporte ao HLS.
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+## Introdução ao HLS
+
+O HLS (HTTP Live Streaming) é um protocolo de streaming de mídia desenvolvido pela Apple. Ele permite a transmissão de conteúdo de vídeo de forma adaptativa, o que significa que a qualidade do vídeo se ajusta automaticamente com base na largura de banda disponível, proporcionando uma experiência de visualização mais suave.
+
+## Como Usar o HLS com a API Quero Assistir
+
+Para aproveitar o suporte do HLS fornecido pela API Quero Assistir, você precisa fazer solicitações de streaming para os recursos apropriados. A API fornecerá URLs de stream HLS que podem ser carregadas diretamente em um player compatível com HLS, como o hls.js.
+
+# Exemplos com hls.js
+```js copy
+// Instancie o player hls.js
+var video = document.getElementById('video');
+var hls = new Hls();
+
+// Carregue o URL do stream HLS da API
+var url = 'URL_DO_STREAM_HLS_DA_API';
+hls.loadSource(url);
+hls.attachMedia(video);
+
+// Inicie a reprodução
+hls.on(Hls.Events.MANIFEST_PARSED, function () {
+  video.play();
+});
+```
+
+<Callout emoji="👾" type="info">
+ Lembre-se de substituir `[URL_DO_STREAM_HLS_DA_API]` pelo URL real fornecido pela API para o streaming HLS.
+</Callout>
+
+Este é apenas um exemplo simples de como integrar o player hls.js com a API Quero Assistir. Certifique-se de ajustar o código de acordo com a estrutura e os requisitos do seu aplicativo.
+
+# Documentação Adicional
+
+Agora que você está pronto para começar a utilizar a API Quero Assistir com o suporte ao protocolo HLS, você pode integrar facilmente conteúdo de vídeo de alta qualidade em seu aplicativo ou serviço.

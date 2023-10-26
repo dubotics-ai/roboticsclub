@@ -1,0 +1,268 @@
+import CodeTab from "../../components/codehighlight";
+
+# Rota `/info/{id}`
+
+A rota `/info/{id}` é um recurso valioso da API Quero Assistir que permite aos usuários pegarem informações do TMDB sobre o conteúdo com um identificador especial para o streaming.
+
+# Objeto da resposta e Erros
+
+## Resposta
+
+Retorna um array em json, contendo objetos com as seguintes chaves:
+
+`type`: tipo do conteúdo, `movie` para filme e `tv` para série.<br /><br />
+
+**Para o `'type': 'movie'`:**<br />
+`backdrop_path`: id da imagem backdrop do conteúdo referente ao tmdb.<br />
+`belongs_to_collection`: se faz parte de uma coleção.<br />
+`budget`: orçamento do conteúdo.<br />
+`genres`: lista de generos do conteúdo, referente ao tmdb.<br />
+`homepage`: link para a página customizada do conteúdo.<br />
+`original_language`: idioma original do conteúdo.<br />
+`original_title`: título original do conteúdo.<br />
+`overview`: descrição do conteúdo de acordo com tmdb.<br />
+`popularity`: popularidade do conteúdo.<br />
+`poster_path`:id da imagem poster do conteúdo referente ao tmdb.<br />
+`production_companies`: companias produtoras, de acordo com tmdb.<br />
+`production_countries`: países de produção.<br />
+`release_date`: data de lançamento.<br />
+`revenue`: receita estimada.<br />
+`runtime`: tempo médio.<br />
+`spoken_languages`: idiomas falados originalmente.<br />
+`status`: status de lançamento.<br />
+`tagline`: tag curta do conteúdo.<br />
+`title`: título traduzido do conteúdo.<br />
+`vote_average`: votação média.<br />
+`vote_count`: quantidade de votos.<br />
+`images`: objeto de imagens do conteúdo referente ao tmdb.<br />
+`videos`: objeto de videos do conteúdo referente ao tmdb.<br />
+`metadata`: contém um campo de nome `id`, referente ao id de exibição do conteúdo.<br />
+<br />
+**Para o `'type': 'tv'`:** `backdrop_path`: id da imagem backdrop do conteúdo referente
+ao tmdb.<br />
+`created_by`: informações sobre o criador.<br />
+`episode_run_time`: tempo médio do episódio.<br />
+`first_air_date`: data referente ao primeiro episódio.<br />
+`genres`: lista de generos do conteúdo, referente ao tmdb.<br />
+`homepage`: link para a página customizada do conteúdo.<br />
+`in_production`: se ainda está em produção,<br />
+`languages`: idiomas falados do contéudo.<br />
+`last_air_date`: data do último episódio registrado.<br />
+`last_episode_to_air`: informações sobre o útimo episodio a ir ao ar.<br />
+`name`: nome do conteúdo.<br />
+`next_episode_to_air`: informações sobre o próximo episodio a ir ao ar.<br />
+`networks`: informações sobre os estúdios.<br />
+`number_of_episodes`: número total de episódios.<br />
+`number_of_seasons`: número de temporadas.<br />
+`origin_country` país de origem.<br />
+`original_language`: idioma original do contéudo.<br />
+`original_name`: nome original do conteúdo.<br />
+`overview`: descrição do conteúdo de acordo com tmdb.<br />
+`popularity`: popularidade do conteúdo.<br />
+`poster_path`: id da imagem poster do conteúdo referente ao tmdb.<br />
+`production_companies`: companias produtoras.<br />
+`seasons`: objeto contendo informações de temporada e de episódios.<br />
+`spoken_languages`: idiomas falados.<br />
+`status`: status do conteúdo.<br />
+`tagline`: tag curta do conteúdo.<br />
+`vote_average`: votação média.<br />
+`vote_count`: quantidade de votos.<br />
+`images`: objeto de imagens do conteúdo referente ao tmdb.<br />
+`videos`: objeto de videos do conteúdo referente ao tmdb.<br />
+`metadata`: contém um objeto com chaves referente ao número da temporada(a partir
+de 1), que consequentemente tem objetos com dados do episódio(a partir de 1). Os
+dados do episódio contém um título e um id para exibição do conteúdo<br />
+<br />
+## Erros
+
+### 500
+
+```json
+{
+  "message": "error",
+  "error": "Server Internal Error. Maybe item dont exists?",
+  "id": "internal-item-error"
+}
+```
+
+> Houve um erro interno não esperado.
+
+## Exemplo de Requisição
+
+<CodeTab cid="request-vod-info" codeSamples={{
+  javascript: `const axios = require('axios');
+
+const apiUrl = 'https://api.queroassistir.com/vod/info/tt9140554';
+
+axios.get(apiUrl)
+.then(response => {
+console.log(response.data);
+})
+.catch(error => {
+console.error('Erro na requisição:', error);
+});`,
+  python: `import requests
+
+api_url = f'https://api.queroassistir.com/vod/info/tt9140554'
+
+response = requests.get(api_url)
+
+if response.status_code == 200:
+data = response.json()
+print(data)
+else:
+print('Erro na requisição:', response.status_code)`,
+  php: `<?php
+
+$apiUrl = "https://api.queroassistir.com/vod/info/tt9140554";
+
+$response = file_get_contents($apiUrl);
+
+if ($response !== false) {
+    $data = json_decode($response, true);
+print_r($data);
+} else {
+echo 'Erro na requisição';
+}
+?>
+`,
+  ruby: `require 'net/http'
+require 'json'
+
+api_url = URI("https://api.queroassistir.com/vod/info/tt9140554")
+
+response = Net::HTTP.get(api_url)
+
+if response.code.to_i == 200
+data = JSON.parse(response.body)
+puts data
+else
+puts 'Erro na requisição:', response.code
+end`,
+  rust: `extern crate reqwest;
+
+fn main() -> Result<(), reqwest::Error> {
+let api_url = format!("https://api.queroassistir.com/vod/info/tt9140554");
+
+    let response = reqwest::blocking::get(&api_url)?;
+
+    if response.status().is_success() {
+        let data: serde_json::Value = response.json()?;
+        println!("{:?}", data);
+    } else {
+        eprintln!("Erro na requisição: {}", response.status());
+    }
+
+    Ok(())
+
+}`
+}} />
+
+## Exemplo de Resposta
+
+A resposta da rota `/vod/info/id` objeto contendo todas as informações do conteúdo.
+
+<details>
+  <summary>Ver exemplo de resposta</summary>
+  ```json copy
+
+{
+"backdrop_path": "/jBUukLTCmXL79itbmK5JtQvImYS.jpg",
+"belongs_to_collection": null,
+"budget": 0,
+"genres": [
+{
+"id": 16,
+"name": "Animação"
+},
+{
+"id": 35,
+"name": "Comédia"
+},
+{
+"id": 10751,
+"name": "Família"
+}
+],
+"homepage": "",
+"imdb_id": "tt14957270",
+"original_language": "en",
+"original_title": "The Simpsons: The Good, the Bart, and the Loki",
+"overview": "Banido novamente de Asgard, Loki enfrenta seus mais ferozes rivais até então: os Simpsons e os heróis mais poderosos de Springfield. O Deus da Trapaça se junta a Bart Simpson em uma derradeira fusão de personagens para homenagear o universo cinematográfico dos super-heróis e vilões da Marvel.",
+"popularity": 32.107,
+"poster_path": "/fjkcqGXMq6LXZzuQ92v3OkHbMev.jpg",
+"production_companies": [
+{
+"id": 18,
+"logo_path": "/uqhagSwM7NAkQWVCQhKTyoqF8XH.png",
+"name": "Gracie Films",
+"origin_country": "US"
+},
+{
+"id": 80853,
+"logo_path": null,
+"name": "AKOM Production Company",
+"origin_country": "KR"
+},
+{
+"id": 154887,
+"logo_path": "/wLFPu95hIMmyLR5hdtvYaMuK0tG.png",
+"name": "20th Television Animation",
+"origin_country": "US"
+},
+{
+"id": 38679,
+"logo_path": "/v2y3LuLxYtW36hvLa8IDGQk3Oql.png",
+"name": "Marvel Television",
+"origin_country": "US"
+}
+],
+"production_countries": [
+{
+"iso_3166_1": "US",
+"name": "United States of America"
+}
+],
+"release_date": "2021-07-07",
+"revenue": 0,
+"runtime": 5,
+"spoken_languages": [
+{
+"english_name": "English",
+"iso_639_1": "en",
+"name": "English"
+}
+],
+"status": "Released",
+"tagline": "",
+"title": "Os Simpsons: O Bem, o Bart e o Loki",
+"video": false,
+"vote_average": 7.332,
+"vote_count": 627,
+"images": {
+"backdrops": [
+
+    ],
+    "logos": [
+
+    ],
+    "posters": [
+
+    ]
+
+},
+"videos": {
+"results": [
+
+    ]
+
+},
+"type": "movie",
+"metadata": {
+"id": "tt14957270"
+}
+}
+
+```
+</details>
+```
