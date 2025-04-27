@@ -1,0 +1,36 @@
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+<Callout emoji="⚠️" type="info">
+ It's recommended to make a backup using go2_firmware_tools after the jailbreak. Please refer to point 7 of this manual.
+</Callout>
+
+<Callout emoji="⚠️" type="info">
+ The method works only for package versions 1.0.24 to 1.1.1 and is currently recommended
+</Callout>
+
+<Callout emoji="⚠️" type="info">
+ Currently, the method supports Ubuntu 22.04 and Ubuntu 24.04. Support for Windows will be added later
+</Callout>
+<br />
+<br />
+<br />
+
+# Let`s Jailbreak!
+
+<Image src="/jailbreak_pawroot.jpg" alt="jailbreak" width={800} height={800} />
+
+- Download the jailbreak binary: [https://disk.yandex.com/d/r2EjmqFmIPC9vw](https://disk.yandex.com/d/r2EjmqFmIPC9vw) and rename it to "jailbreak"
+- Connect the dog in STA_L mode to your local network(that means, connect the robot on your wifi) and ensure your PC is on the same network.
+- Make sure mobile APP is closed
+- Run ./jailbreak and follow the on-screen instructions.
+```bash
+chmod +x jailbreak
+./jailbreak
+```
+- Once the script is completed, REBOOT your dog norbmally, and wait for the dog to boot up.
+- Enjoy your root access by ssh-ing under root, the password is ```theroboverse```:
+```bash
+ssh root@[your_dog_ip]
+```
+- To enable secondary development and do a backup on AIR/PRO follow the instructions in [go2_firmware_tools](https://github.com/legion1581/go2_firmware_tools/tree/1.1.1)

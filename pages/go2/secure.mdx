@@ -1,7 +1,113 @@
 import Image from 'next/image'
 import { Callout } from 'nextra/components'
 
-<Callout emoji="👾" type="info">
- Secure Boot is a new protection feature implemented by Unitree to combat jailbreaking and unauthorized software modifications by users. The main idea behind it is to ensure that partitions are signed only with a private key, which is exclusively held by Unitree headquarters. Early Go2 units with the Secure Boot feature began appearing in January 2025.
- To detect what type of boot you have follow the steps below:
+<Callout emoji="⚠️" type="info">
+ In the case of a Secure Boot Go2, do not forget that any write operation to the preloader, uboot, or boot partition will lead to bricking the device. Keep this in mind and proceed with caution.
 </Callout>
+
+# Secure Boot
+Secure Boot is a new protection feature implemented by Unitree to combat jailbreaking and unauthorized software modifications by users. The main idea behind it is to ensure that partitions are signed only with a private key, which is exclusively held by Unitree headquarters. Early Go2 units with the Secure Boot feature began appearing in January 2025.
+To detect what type of boot you have follow the steps below:
+
+## Rkdeveloptool Installation
+
+Install the necessary build dependencies. Open a terminal and run:
+```bash	
+sudo apt-get update
+sudo apt-get install -y git libudev-dev libusb-1.0-0-dev dh-autoreconf
+```
+
+<Callout emoji="⚠️" type="info">
+ If you are using Ubuntu 20.04, use this one right below
+</Callout>
+
+```bash	
+git clone https://github.com/rockchip-linux/rkdeveloptool.git
+```
+
+<Callout emoji="⚠️" type="info">
+ But, if you have an Ubuntu 22.04 or 24.04 use this fork instead:
+</Callout>
+
+```bash	
+git clone https://github.com/wing-kit/rkdeveloptool
+```
+
+Navigate into the cloned directory:
+
+```bash	
+cd rkdeveloptool
+```
+
+Compile rkdeveloptool from source:
+
+```bash	
+autoreconf -i
+./configure
+make
+```
+
+Once the build process is complete, install rkdeveloptool:
+
+```bash	
+sudo make install
+```
+
+To ensure rkdeveloptool was installed correctly, you can run:
+
+```bash	
+rkdeveloptool -h
+```
+This command should display the help information for rkdeveloptool, indicating successful installation.
+
+## Getting the preloader
+First, let's remove the top cover from the robot. Please refer to video of disassembly of Go2
+
+To enter Loader mode, first connect a USB Type-C cable from the device to the PC. Then, press and hold the upper button on the mainboard while turning on the Go2. The robot should not stand up after this action.
+
+<Image src="/loader_mode.png" alt="loader" width={800} height={800} />
+
+## After the loader mode
+
+Check it by running:
+
+```bash
+sudo rkdeveloptool ld
+```
+
+You should see the device in Loader mode .
+Then, let's save a preloader.img from the Go2.
+
+```bash
+sudo rkdeveloptool rl 0x00 0x4000 preloader.img
+```
+
+## Inspect the preloader
+[Download the script from here](https://disk.yandex.com/d/LJf9__w9pGy83A)	<br />
+Change the permissions to executable:
+
+```bash
+sudo chmod +x inspect_boot_type.sh
+```
+
+Inspect the preloader
+
+```bash
+./inspect_boot_type.sh preloader.img
+```
+
+For non-Secure boot Go2 you`ll see:
+
+```bash
++======================================================================+
+| Boot Type: Non-Secure Boot (Signature: RKNS)                         |
++======================================================================+
+```
+
+For Secure boot Go2 you`ll see:
+
+```bash
++======================================================================+
+| Boot Type: Secure Boot (Signature: RKSS)                             |
++======================================================================+
+```

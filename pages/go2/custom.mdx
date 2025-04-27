@@ -1,0 +1,27 @@
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+<Callout emoji="⚠️" type="info">
+ To install a custom package, you should already have rooted your Go2 by using a [jailbreak tool](/go2/jailbreak).
+</Callout>
+
+<br />
+
+# Custom Package
+
+Due to the increasing security levels being applied in the new Unitree package updates (1.1.2-1.1.4), a new method has been introduced. This method essentially replaces the modified files in the filesystem. It will also allow for effective downgrades in future Unitree firmware versions. Custom packages come with pre-enabled secondary development and therefore do not require any manipulation beyond installation.
+
+## Starting the process
+To install a custom package, simply follow the instructions in the [go2_firmware_tools](https://github.com/legion1581/go2_firmware_tools/tree/1.1.1-1.1.4) ```(branch 1.1.1-1.1.4)``` repository and select Firmware.
+
+### Install Custom Package
+<br />
+<Image src="/custom_package.png" alt="install_custom" width={400} height={400} />
+
+The script will download and install the custom package. You will then be prompted to reboot. Press `[Enter]`.`
+<br />
+<Image src="/custom_version_mod.png" alt="install_custom" width={400} height={400} />
+
+Additionally, to check the version in the app, you can simply execute `Data → Automatic Machine` Inspection and press `Start` at the right upper corner:
+<br />
+<Image src="/machine_test.jpg" alt="install_custom" width={400} height={400} />

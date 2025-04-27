@@ -1,0 +1,73 @@
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+<Callout emoji="⚠️" type="info">
+ This will enable front/back/left/right flip and hand walk.
+</Callout>
+
+# Enable AI Sport mode on AIR
+
+AI Sport mode is the mode where the GO2 Air will be super stable, and will do auto recovery from falls - regardless how harsh you kick him! In practice it makes the robot much more stable when going up/down stairs or walking across different terrains. AI Mode is standard on the Go2 Pro and Go2 Edu.
+
+In AI Sport mode, GO2 can stand on hands/rear legs and make front/back/left/right flip.
+
+In order to enable the AI Sport mode, you need to install a [custom firmware](/go2/custom) on the AIR, as it expands the service list with the services that are missing in the AIR (e.g., `ai_sport`, `motion_switcher`, `4gcm`, and others).
+
+After the installation done, follow the below steps:
+- Crunch GO2 down
+- Go to Service Status
+- Disable sport-mode
+- Enable ai-sport.
+- Congratulation! AI mode is enabled!
+
+<Image src="/app.webp" alt="enable_ai_sport" width={400} height={400} />
+
+Back to main screen, and press Go! `You may notice that the dog is moving slowly`. Try to kick him! He's super stable! And will do auto recovery from falls!
+
+## Unlocking Special Function menu in AI mode
+<Callout emoji="⚠️" type="info">
+ Caution: The below actions may cause damage. Make sure to put the dog in safe place and surroundings before applying the below steps.
+</Callout>
+
+<Callout emoji="🤞" type="info">
+ Note: It's a little bit tricky now. You need to enable the console, open the console, and run a javascript command to enable these features on the app. Sounds complicated? Maybe! But you just need to follow the below steps:
+</Callout>
+
+- From the mobile app, enable the degug console that allows command execution. To access it on both Android and iOS, simply `tap 6 times` on the right corner of the sport mode adjustment. After that the green icon with vConsole would appear.
+<Image src="/ai-console.jpg" alt="enable_ai_sport" width={400} height={400} />
+
+- Tap to paste a javascript command:
+<Image src="/console-tap.jpg" alt="enable_ai_sport" width={400} height={400} />
+
+- Copy and paste the commands appropriate for your operating system (iOS or Android) from the code blocks below. Copy the commands as is, no need to change the SN or userid.
+<Callout emoji="⚠️" type="info">
+ Tips for iOS Users: To open the copy/paste menu, tap the field with `three fingers`.
+</Callout>
+
+### IOS 
+```javascript
+window.ZHBridge.Core.callJsHandler({name: "appSendRoute",args: {
+    url: "operation",
+    sn: "B42D2000XXXXXXXX",userid: "2000",
+    mode: "edu", language: "en", topLeft: 59,
+    sportmode: "ai",
+    length: 7},
+argsCount: 7})
+```
+
+### Android
+```javascript
+window.appSendRoute({
+  url: "operation",
+  sn: "B42D2000XXXXXXXX",userid: "2000",
+  mode: "edu",language: "en",topLeft: 59,
+  sportmode: "ai"
+  ,length: 7}
+)
+```
+
+When trying to access special function menu, it will ask for a password after switching to ai mode.
+
+The special password would be: `06af30`
+
+Enjoy!
