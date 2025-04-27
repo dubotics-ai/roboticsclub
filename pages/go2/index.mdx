@@ -1,0 +1,143 @@
+import { Callout, Table, Tr, Td, Th } from 'nexTra/components'
+
+# Current Project Status for Pro and Air 🤖
+<br/>
+<Table style={{overflowX: 'hidden'}}>
+  <thead>
+    <Tr>
+        <Th>Firmware</Th>
+        <Th>Region</Th>
+        <Th>WebRTC API</Th>
+        <Th>DDS API</Th>
+        <Th>Jailbreak Tool</Th>
+        <Th>Jailbreak via Custom RootFS</Th>
+        <Th>Custom Package</Th>
+    </Tr>
+  </thead>
+  <tbody>
+    <Tr>
+  <Td>1.0.19</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.0.20</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.0.21</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.0.22</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.0.23</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.0.24</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.0.25</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+</Tr>
+<Tr>
+  <Td>1.1.1</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+</Tr>
+<Tr>
+  <Td>1.1.2</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+</Tr>
+<Tr>
+  <Td>1.1.3</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+</Tr>
+<Tr>
+  <Td>1.1.4</Td>
+  <Td>Global</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'green'}}>Full</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'red'}}>Not Available</Td>
+  <Td style={{color: 'green'}}>Available</Td>
+</Tr>
+
+  </tbody>
+</Table>
+
+
+<Callout emoji="👾" type="info">
+ Description of Terms
+</Callout>
+
+## Jailbreak Tool
+
+A **Jailbreak Tool** is a program or method used to unlock full (root) access to a device's system by exploiting vulnerabilities in the firmware.  
+With root access, you gain complete control over the device, allowing deeper changes than normally possible.  
+However, **root access alone does not enable full development capabilities** — you still need to perform additional setup steps, such as using the `go2_firmware_tools`.
+
+## Jailbreak via Custom RootFS
+
+**Jailbreaking via Custom RootFS** means replacing the system's root filesystem (RootFS) with a custom-built version.  
+This is usually done by connecting the device to a computer via USB Type-C and using a tool like `rkdeveloptool`.
+
+The custom RootFS provides immediate root access with default credentials: `root:theroboverse`.  
+**Important:** while root access is enabled, **development features are still not activated by default**. You must perform extra steps, typically using `go2_firmware_tools`, to fully enable development mode.
+
+## Custom Package
+
+A **Custom Package** is an additional package that can be installed on a device that already has root access (either through a jailbreak tool or a custom RootFS).  
+It is installed via `go2_firmware_tools` and **comes with development features already enabled**.

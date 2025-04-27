@@ -6,29 +6,29 @@ import logo from './src/logo.png';
 
 const RenderLastEditText: React.FC = (props: {timestamp: Date}) => {
   return <>
-    <p>Última edição em {props.timestamp.getDate()} de {props.timestamp.toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}.</p>
+    <p>Last edited on {props.timestamp.getDate()} de {props.timestamp.toLocaleString('en-US', { month: 'long', year: 'numeric' })}.</p>
   </>;
 }
 
 const FeedBackButton: React.FC = () => {
   return <>
-    <p>Dúvida? Dê-nos seu feedback →</p>
+    <p>Doubts? Give us your feedback →</p>
   </>;
 }
 
 const config: DocsThemeConfig = {
-  faviconGlyph: `🐼`,
+  faviconGlyph: `🤖`,
   nextThemes: {
     defaultTheme: 'dark'
   },
   useNextSeoProps() {
     return {
-      titleTemplate: '%s – Quero Assistir'
+      titleTemplate: '%s – Robotics Club'
     }
   },  
-  logo: <Image src={logo} alt="Quero Assistir" width={65} height={65} />,
+  logo: <Image src={logo} alt="Robotics Club" width={30} height={30} />,
   project: {
-    link: 'https://queroassistir.com',
+    link: 'https://roboticsclub.com.br',
     icon: <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -42,37 +42,41 @@ const config: DocsThemeConfig = {
     />
   </svg>
   },
-  chat: {
-    link: 'https://discord.gg/y2QX3W7mVR',
-  },
+  //chat: {
+  //  link: 'https://discord.gg/y2QX3W7mVR',
+  //},
   footer: {
-    text: 'Quero Assistir',
+    text: 'Robotics Club',
   },
   toc: {
-    title: "Nesta página",
+    title: "In this Page",
     backToTop: true,
   },
   editLink: {
     text: "",
   },
-  feedback: {
-    content: FeedBackButton,
-    useLink: () => 'https://www.tabnews.com.br/queroassistir'
-  },
+  //feedback: {
+  //  content: FeedBackButton,
+  //  useLink: () => 'https://www.tabnews.com.br/queroassistir'
+  //},
   themeSwitch: {
-    component: ({ lite, className }) => {
-      return (<></>)
-    },
     useOptions() {
       return {
-        light: 'Claro',
-        dark: 'Escuro',
-        system: 'Sistema'
+        light: 'Light',
+        dark: 'Dark',
+        system: 'System',
       }
     }
   },
+  //i18n: [
+  //  { locale: 'en', text: 'English' },
+  //  { locale: 'zh', text: '中文' },
+  //  { locale: 'pt', text: 'Português' },
+  //  { locale: 'es', text: 'Español' },
+  //  { locale: 'ar', text: 'العربية', direction: 'rtl' }
+  //],
   search: {
-    placeholder: "Pesquisar na documentação...",
+    placeholder: "Search in the documentation...",
   },
   gitTimestamp: RenderLastEditText,
   sidebar: {
