@@ -1,0 +1,16 @@
+import Image from 'next/image'
+
+# What you will see 
+Scripts that emulates the GO2 Controller communication with the robot and apply commands on it. This dont need the jailbreak to work at all.
+
+## Before you start
+Make sure you have instalated the go2 webrtc library running the following command:
+```bash
+cd ~
+sudo apt update
+sudo apt install python3-pip
+sudo apt install portaudio19-dev
+git clone --recurse-submodules https://github.com/legion1581/go2_webrtc_connect.git
+cd go2_webrtc_connect
+pip install -e .
+```
